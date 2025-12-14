@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Theme Palette */
+    --background: 0 0% 100%;
+    /* #ffffff */
+    --foreground: 0 0% 3.9%;
+    /* #0a0a0a */
+
+    --card: 0 0% 100%;
+    /* #ffffff */
+    --card-foreground: 0 0% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    --primary: 0 0% 9%;
+    /* #171717 */
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 96.1%;
+    /* #f5f5f5 */
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+
+    --radius: 0.75rem;
+
+    /* Compatibility variables - Light Theme */
+    --body: #0a0a0a;
+    --title: #0a0a0a;
+    --grey: #666666;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Playfair Display', serif;
+    /* Optional: Use Inter for everything if preferred, but Playfair adds a premium touch */
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Mobile menu square button styles - Global override */
+@media screen and (max-width: 991px) {
+
+  .mobileMenuActions .navPrimaryButton .navPrimaryText,
+  .mobileMenu div .navPrimaryButton .navPrimaryText,
+  .mobileMenu .navPrimaryButton .navPrimaryText {
+    border-radius: 0 !important;
+    padding: 12px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    width: 80px !important;
+    height: 80px !important;
+    text-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1.2 !important;
+    min-width: 80px !important;
+    min-height: 80px !important;
+    max-width: 80px !important;
+    max-height: 80px !important;
+  }
+
+  .mobileMenuActions {
+    display: flex !important;
+    gap: 16px !important;
+    justify-content: flex-end !important;
+    margin-top: 20px !important;
+  }
+}

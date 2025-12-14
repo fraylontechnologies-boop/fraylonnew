@@ -1,0 +1,771 @@
+/* Global CSS Variables and Base Styles */
+@import './animations.css';
+
+/* Fresh scrolling setup */
+html {
+  scroll-behavior: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+  min-height: 100%;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: none !important;
+  scroll-snap-align: none !important;
+}
+
+body {
+  scroll-behavior: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
+  height: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: none !important;
+  scroll-snap-align: none !important;
+}
+
+* {
+  scroll-snap-type: none !important;
+  scroll-snap-align: none !important;
+}
+
+/* Main element */
+main {
+  display: block;
+  width: 100%;
+  min-height: auto;
+  /* was 100vh; avoid full-viewport sections */
+  position: relative;
+  scroll-snap-type: none !important;
+  /* Add padding-top to compensate for fixed navbar (110px height) on desktop */
+  padding-top: 110px;
+}
+
+/* On mobile, reduce padding since mobile nav might be different */
+@media screen and (max-width: 768px) {
+  main {
+    padding-top: 0;
+  }
+}
+
+/* CRITICAL: Global rule to prevent ANY section from being sticky OR snapping */
+section {
+  position: relative !important;
+  scroll-snap-align: none !important;
+  scroll-snap-stop: normal !important;
+  /* Ensure sections flow normally - NO sticky/fixed positioning */
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  /* Prevent sections from filling viewport - this causes "stuck" effect */
+  min-height: auto !important;
+  height: auto !important;
+  /* Allow transforms for animations, but NOT position transforms */
+  /* transform: none !important; - REMOVED: too aggressive */
+}
+
+/* Override for any section class variants */
+section.section,
+section[class*="section--"],
+section[class*="section-"] {
+  position: relative !important;
+  scroll-snap-align: none !important;
+  top: auto !important;
+  bottom: auto !important;
+}
+
+/* Smooth scroll will be enabled via JavaScript after first scroll */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html,
+  body,
+  *,
+  main,
+  #root,
+  .App {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Sliding animation for tools */
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+/* Enhanced tools slider styles */
+.tools-slider {
+  animation-play-state: running;
+}
+
+.tools-slider:hover {
+  animation-play-state: paused;
+}
+
+/* Responsive slider adjustments */
+@media screen and (max-width: 768px) {
+  .tools-slider {
+    gap: 0 !important;
+    animation-duration: 20s !important;
+  }
+
+  .tools-slider>div {
+    min-width: 100px !important;
+    padding: 1rem 0.75rem !important;
+    margin-right: 3rem !important;
+  }
+
+  .tools-slider>div>div:first-child {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .tools-slider span {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .tools-slider {
+    gap: 0 !important;
+    animation-duration: 15s !important;
+  }
+
+  .tools-slider>div {
+    min-width: 80px !important;
+    padding: 0.75rem 0.5rem !important;
+    margin-right: 2rem !important;
+  }
+
+  .tools-slider>div>div:first-child {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .tools-slider span {
+    font-size: 0.75rem !important;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove focus outlines from all buttons */
+button:focus,
+button:focus-visible,
+input:focus,
+input:focus-visible,
+a:focus,
+a:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Light Theme Palette - Updated per user request */
+  --background: #FFFFFF;
+  --white: #FFFFFF;
+  --black: #000000;
+
+  /* Text Colors */
+  --title: #0F172A;
+  /* Text Primary - Strong dark navy/black */
+  --foreground: #0F172A;
+  /* Text Primary */
+  --body: #475569;
+  /* Text Secondary - Soft grey-blue for body text */
+  --grey: #475569;
+  /* Mapping grey to text secondary */
+
+  /* Brand Colors */
+  --blue-primary: #1A4FFF;
+  /* Main Brand Blue */
+  --blue-primary-hover: #0A2EE0;
+  /* Secondary Blue - Hover states */
+  --button-primary: #1A4FFF;
+  --button-primary-hover: #0A2EE0;
+
+  /* Accents */
+  --teal: #22D3EE;
+  /* Accent - Small accents */
+  --accent: #22D3EE;
+
+  /* Borders & Separators */
+  --border-light: #E2E8F0;
+  /* Subtle separators */
+  --border-black-10: #E2E8F0;
+  /* Mapping existing border var to new palette */
+  --border-white-10: rgba(0, 0, 0, 0.05);
+
+  /* Legacy/Other mappings */
+  --primary: #171717;
+  /* Keeping original black for specific utility uses if needed, but buttons use blue now */
+  --primary-nav: #FFFFFF;
+  /* Navbar background */
+  --secondary: #f5f5f5;
+  --transparent: transparent;
+
+  --font-body: 'Inter', 'Figtree', 'Helvetica Neue', Arial, sans-serif;
+  --font-heading: 'Montserrat', 'Inter', 'Figtree', 'Helvetica Neue', Arial, sans-serif;
+
+  --img-background: #f0f0f0;
+
+  /* Premium Accent Colors - Warm & Metallic (Keep if used in specific components) */
+  --gold: #D4AF37;
+  --gold-hover: #B8860B;
+  --copper: #B87333;
+  --mustard: #DAA520;
+
+  /* Content Section Backgrounds */
+  --section-bg-off-white: #FAFAFA;
+  --section-bg-light-gray: #F5F5F5;
+  --section-bg-warm-white: #FFFEF9;
+
+  /* Fresh Accent Colors */
+  --emerald: #10B981;
+  --pastel-teal: #5EEAD4;
+  --pastel-emerald: #A7F3D0;
+  --pastel-mint: #D1FAE5;
+
+  /* Modern Layout Variables */
+  --container-max-width: 1400px;
+  --container-padding: clamp(1rem, 4vw, 2rem);
+  --section-padding: clamp(3rem, 8vw, 6rem);
+  --section-padding-small: clamp(2rem, 5vw, 3rem);
+  --section-padding-large: clamp(4rem, 12vw, 8rem);
+
+  /* Typography Scale */
+  --text-xs: clamp(0.75rem, 0.5vw + 0.5rem, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);
+  --text-base: clamp(1rem, 0.5vw + 0.875rem, 1.125rem);
+  --text-lg: clamp(1.125rem, 0.5vw + 1rem, 1.25rem);
+  --text-xl: clamp(1.25rem, 0.5vw + 1.125rem, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1vw + 1.25rem, 2rem);
+  --text-3xl: clamp(1.875rem, 1.5vw + 1.5rem, 2.5rem);
+  --text-4xl: clamp(2.25rem, 2vw + 1.75rem, 3rem);
+  --text-5xl: clamp(3rem, 3vw + 2rem, 4rem);
+  --text-6xl: clamp(3.75rem, 4vw + 2.5rem, 5rem);
+
+  /* Spacing Scale */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Responsive Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* Spacing Variables */
+  --mobile-spacing: 20px;
+  --desktop-spacing: 80px;
+  --tablet-spacing: 80px;
+  --mobile-landscape-spacing: 80px;
+
+  /* Design System Colors */
+  --flowui-component-library--gray-900: #160042;
+  --flowui-component-library--grey-300: #e4e6f1;
+  --flowui-component-library--gray-200: #f3f5fb;
+  --flowui-component-library--white: white;
+  --flowui-component-library--gray-700: #282556;
+  --flowui-component-library--gray-500: #6b7094;
+  --flowui-component-library--gray-100: #f7f9fd;
+
+  --untitled-ui--gray600: #475467;
+  --untitled-ui--primary600: #7f56d9;
+  --untitled-ui--white: white;
+  --untitled-ui--primary700: #6941c6;
+  --untitled-ui--primary100: #f4ebff;
+  --untitled-ui--gray100: #f2f4f7;
+  --untitled-ui--gray700: #344054;
+  --untitled-ui--primary50: #f9f5ff;
+  --untitled-ui--gray300: #d0d5dd;
+  --untitled-ui--gray50: #f9fafb;
+  --untitled-ui--gray800: #1d2939;
+  --untitled-ui--gray900: #101828;
+  --untitled-ui--primary500: #9e77ed;
+  --untitled-ui--gray200: #eaecf0;
+  --untitled-ui--primary300: #d6bbfb;
+  --untitled-ui--gray500: #667085;
+  --untitled-ui--gray400: #98a2b3;
+  --untitled-ui--warning300: #fec84b;
+
+  --systemflow-lite--neutral--100: #0e0f11;
+  --systemflow-lite--neutral--80: #636b75;
+  --systemflow-lite--primary--10: #f2f6ff;
+  --systemflow-lite--primary--60: #2f54eb;
+  --systemflow-lite--neutral--40: #dde1e6;
+  --systemflow-lite--neutral--10-2: white;
+  --systemflow-lite--primary--50: #597ef7;
+  --systemflow-lite--primary--70: #1d39c4;
+  --systemflow-lite--primary--80: #10239e;
+  --systemflow-lite--primary--40: #85a5ff;
+  --systemflow-lite--neutral--70: #838d95;
+  --systemflow-lite--primary--20: #e5eeff;
+  --systemflow-lite--neutral--90: #1e2024;
+  --systemflow-lite--neutral--20: #f9fafb;
+  --systemflow-lite--neutral--30: #edf0f3;
+}
+
+/* CSS Reset and Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: auto !important;
+  /* Force auto height */
+  min-height: 100%;
+  width: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto !important;
+  /* Ensure proper mobile scrolling */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto;
+  scroll-snap-type: none !important;
+  /* Disable scroll snap */
+  /* Prevent height constraints that block scroll */
+  max-height: none !important;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--body);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+  min-height: 100vh;
+  height: auto !important;
+  /* Force auto height to allow scrolling */
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto !important;
+  /* Ensure proper mobile scrolling */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto;
+  /* Allow native scrolling without interference */
+  position: relative;
+  overscroll-behavior: auto !important;
+  /* Allow normal scroll behavior */
+  overscroll-behavior-x: auto !important;
+  /* Chrome-specific: prevent horizontal scroll bouncing */
+  overscroll-behavior-y: auto !important;
+  /* Chrome-specific: allow normal vertical scroll */
+  /* Prevent height constraints that block scroll */
+  max-height: none !important;
+  /* Chrome-specific: Ensure smooth scrolling doesn't interfere */
+  -webkit-overflow-scrolling: touch !important;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  height: auto !important;
+  /* Ensure root can grow beyond viewport */
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: visible !important;
+  /* Allow content to overflow */
+}
+
+/* Modern Typography System */
+h1 {
+  color: var(--title);
+  text-transform: uppercase;
+  margin: 0;
+  font-size: var(--text-6xl);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-family: var(--font-heading);
+}
+
+h2 {
+  color: var(--title);
+  margin: 0;
+  font-size: var(--text-5xl);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-family: var(--font-heading);
+}
+
+h3 {
+  color: var(--title);
+  margin: 0;
+  font-size: var(--text-4xl);
+  font-weight: 600;
+  line-height: 1.3;
+  font-family: var(--font-heading);
+}
+
+h4 {
+  color: var(--title);
+  margin: 0;
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  line-height: 1.4;
+  font-family: var(--font-heading);
+}
+
+h5 {
+  color: var(--title);
+  margin: 0;
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  line-height: 1.4;
+  font-family: var(--font-heading);
+}
+
+h6 {
+  color: var(--title);
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: 500;
+  line-height: 1.5;
+  font-family: var(--font-heading);
+}
+
+/* Body text with fluid sizing */
+p {
+  margin: 0;
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--body);
+}
+
+/* Text size utilities */
+.text-xs {
+  font-size: var(--text-xs);
+}
+
+.text-sm {
+  font-size: var(--text-sm);
+}
+
+.text-base {
+  font-size: var(--text-base);
+}
+
+.text-lg {
+  font-size: var(--text-lg);
+}
+
+.text-xl {
+  font-size: var(--text-xl);
+}
+
+.text-2xl {
+  font-size: var(--text-2xl);
+}
+
+.text-3xl {
+  font-size: var(--text-3xl);
+}
+
+.text-4xl {
+  font-size: var(--text-4xl);
+}
+
+.text-5xl {
+  font-size: var(--text-5xl);
+}
+
+.text-6xl {
+  font-size: var(--text-6xl);
+}
+
+p {
+  margin-bottom: 0;
+}
+
+a {
+  color: var(--blue-primary);
+  text-decoration: underline;
+}
+
+ul,
+ol {
+  margin-top: 0;
+  margin-bottom: 10px;
+  padding-left: 40px;
+}
+
+label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
+  display: block;
+}
+
+blockquote {
+  border-left: 5px solid #e2e2e2;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+figure {
+  margin-bottom: 10px;
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+  display: inline-block;
+}
+
+/* Utility Classes */
+.d-none {
+  display: none;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.color-black {
+  color: var(--black);
+}
+
+.body-small {
+  font-size: 14px;
+  line-height: 150%;
+}
+
+.body-large {
+  font-size: 18px;
+  line-height: 150%;
+}
+
+/* App Container */
+.app {
+  width: 100%;
+  min-height: 100vh;
+  height: auto !important;
+  /* Allow app to grow beyond viewport */
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: visible !important;
+  /* Don't constrain overflow */
+}
+
+/* Fix duplicate scrollbars - Hide all scrollbars except main page */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+html::-webkit-scrollbar {
+  width: 8px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background-color: #999;
+}
+
+/* Hide scrollbars on all other elements to prevent duplicate scrollbars */
+*:not(html):not(.mobileMegaMenu) {
+  scrollbar-width: none;
+}
+
+*:not(html):not(.mobileMegaMenu)::-webkit-scrollbar {
+  display: none;
+}
+
+/* Form Elements */
+input,
+select,
+textarea {
+  color: var(--body);
+  background-color: var(--white);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.42857;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--blue-primary);
+  outline: none;
+}
+
+input::placeholder,
+select::placeholder,
+textarea::placeholder {
+  color: var(--grey);
+}
+
+/* Mobile-specific optimizations */
+@media screen and (max-width: 991px) {
+  :root {
+    --desktop-spacing: var(--tablet-spacing);
+  }
+
+  h1 {
+    font-size: 42px;
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+
+  /* Enhanced mobile scrolling and touch handling */
+  html,
+  body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: auto !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    max-height: none !important;
+    /* Remove max-height constraints */
+    /* Better mobile performance - allow vertical scrolling */
+    touch-action: pan-y !important;
+    position: relative !important;
+    scroll-snap-type: none !important;
+    /* Disable scroll snap on mobile */
+  }
+
+  #root,
+  .app {
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+
+  /* Only prevent scrolling when mobile menu is open - WITHOUT position fixed */
+  body.mobile-menu-open {
+    overflow: hidden !important;
+    /* REMOVED: position: fixed - This was causing sections to stick! */
+    /* position: fixed !important; */
+    width: 100% !important;
+    height: 100% !important;
+    /* Allow touch scrolling within menu */
+    touch-action: pan-y !important;
+  }
+}
+
+/* Deep Navy Theme – Global Overrides for hardcoded components */
+/* Ensure buttons render white text on dark backgrounds */
+button,
+.btn,
+[class*="Button"],
+[class*="button"],
+.navPrimaryButton,
+.nav-secondary,
+.nav-primary {
+  color: inherit;
+}
+
+/* Ensure common section/text containers inherit theme text color */
+section,
+.section,
+[class*="section"],
+[class*="Section"] {
+  color: var(--body);
+}
+
+/* Inputs on dark background */
+input,
+select,
+textarea {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+input::placeholder,
+select::placeholder,
+textarea::placeholder {
+  color: #cbd5e1;
+}
+
+@media screen and (max-width: 767px) {
+  :root {
+    --desktop-spacing: var(--mobile-spacing);
+    --tablet-spacing: var(--mobile-spacing);
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+}

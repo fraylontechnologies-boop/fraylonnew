@@ -1,0 +1,447 @@
+/* Layout Components */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+  margin: 0 auto;
+  position: relative;
+}
+
+.container--narrow {
+  max-width: 1200px;
+}
+
+.container--wide {
+  max-width: 1600px;
+}
+
+.container--full {
+  max-width: none;
+  padding: 0;
+}
+
+.section {
+  padding: clamp(2rem, 5vw, 3rem) 0;
+  width: 100%;
+  /* CRITICAL: Ensure sections NEVER have sticky positioning */
+  /* Sticky should only be applied to specific elements (headers, navbars, formContainer), not sections */
+  position: relative !important; /* Override any potential sticky positioning */
+}
+
+.section--small {
+  padding: clamp(1.5rem, 4vw, 2rem) 0;
+  position: relative !important; /* Prevent sticky on section variants */
+}
+
+.section--large {
+  padding: clamp(4rem, 12vw, 8rem) 0;
+  position: relative !important; /* Prevent sticky on section variants */
+}
+
+.section--no-padding {
+  padding: 0;
+  position: relative !important; /* Prevent sticky on section variants */
+}
+
+.section--hero {
+  padding: clamp(4rem, 15vw, 10rem) 0 clamp(3rem, 8vw, 6rem);
+  /* CHANGED: Remove min-height: 100vh which can cause sections to appear stuck */
+  /* min-height: 100vh; - REMOVED to prevent full-viewport sections */
+  display: flex;
+  align-items: center;
+  position: relative !important; /* Prevent sticky on section variants */
+}
+
+/* Section Backgrounds */
+.section--bg-white {
+  background-color: var(--section-bg-off-white);
+  position: relative !important; /* Prevent sticky on section backgrounds */
+  --body: #4b5563;
+  --title: #0f172a;
+  --grey: #6b7280;
+  color: #4b5563;
+}
+
+.section--bg-gray {
+  background-color: var(--section-bg-light-gray);
+  position: relative !important; /* Prevent sticky on section backgrounds */
+  --body: #4b5563;
+  --title: #0f172a;
+  --grey: #6b7280;
+  color: #4b5563;
+}
+
+.section--bg-primary {
+  background-color: var(--primary);
+  color: var(--white);
+  position: relative !important; /* Prevent sticky on section backgrounds */
+}
+
+/* Additional warm section backgrounds */
+.section--bg-warm-white {
+  background-color: var(--section-bg-warm-white);
+  position: relative !important;
+}
+
+/* Full width sections */
+.sectionFullWidth {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Modern Grid System */
+.grid {
+  display: grid;
+  gap: clamp(1rem, 3vw, 2rem);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.grid--cols-1 {
+  grid-template-columns: 1fr;
+}
+
+.grid--cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid--cols-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.grid--cols-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* Auto-fit grids */
+.grid--auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid--auto-fill {
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+/* Grid areas */
+.grid--areas {
+  grid-template-areas: 
+    "header header"
+    "sidebar main"
+    "footer footer";
+}
+
+.grid--header { grid-area: header; }
+.grid--sidebar { grid-area: sidebar; }
+.grid--main { grid-area: main; }
+.grid--footer { grid-area: footer; }
+
+/* Grid gaps */
+.grid--gap-xs { gap: 0.5rem; }
+.grid--gap-sm { gap: 1rem; }
+.grid--gap-md { gap: 1.5rem; }
+.grid--gap-lg { gap: 2rem; }
+.grid--gap-xl { gap: 3rem; }
+.grid--gap-2xl { gap: 4rem; }
+
+/* Enhanced Flexbox Utilities */
+.flex {
+  display: flex;
+}
+
+.flex--column {
+  flex-direction: column;
+}
+
+.flex--row {
+  flex-direction: row;
+}
+
+.flex--wrap {
+  flex-wrap: wrap;
+}
+
+.flex--nowrap {
+  flex-wrap: nowrap;
+}
+
+.flex--reverse {
+  flex-direction: row-reverse;
+}
+
+.flex--column-reverse {
+  flex-direction: column-reverse;
+}
+
+/* Justify Content */
+.justify--start {
+  justify-content: flex-start;
+}
+
+.justify--end {
+  justify-content: flex-end;
+}
+
+.justify--center {
+  justify-content: center;
+}
+
+.justify--between {
+  justify-content: space-between;
+}
+
+.justify--around {
+  justify-content: space-around;
+}
+
+.justify--evenly {
+  justify-content: space-evenly;
+}
+
+/* Align Items */
+.align--start {
+  align-items: flex-start;
+}
+
+.align--end {
+  align-items: flex-end;
+}
+
+.align--center {
+  align-items: center;
+}
+
+.align--baseline {
+  align-items: baseline;
+}
+
+.align--stretch {
+  align-items: stretch;
+}
+
+/* Align Content */
+.align-content--start {
+  align-content: flex-start;
+}
+
+.align-content--end {
+  align-content: flex-end;
+}
+
+.align-content--center {
+  align-content: center;
+}
+
+.align-content--between {
+  align-content: space-between;
+}
+
+.align-content--around {
+  align-content: space-around;
+}
+
+.align-content--stretch {
+  align-content: stretch;
+}
+
+/* Flex Grow/Shrink */
+.flex--grow {
+  flex-grow: 1;
+}
+
+.flex--shrink {
+  flex-shrink: 1;
+}
+
+.flex--no-shrink {
+  flex-shrink: 0;
+}
+
+.flex--no-grow {
+  flex-grow: 0;
+}
+
+/* Modern Spacing System */
+.gap-0 { gap: 0; }
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-5 { gap: 1.25rem; }
+.gap-6 { gap: 1.5rem; }
+.gap-8 { gap: 2rem; }
+.gap-10 { gap: 2.5rem; }
+.gap-12 { gap: 3rem; }
+.gap-16 { gap: 4rem; }
+.gap-20 { gap: 5rem; }
+.gap-24 { gap: 6rem; }
+.gap-32 { gap: 8rem; }
+
+/* Flex gap presets */
+.gap-xs { gap: 0.5rem; }
+.gap-sm { gap: 1rem; }
+.gap-md { gap: 1.5rem; }
+.gap-lg { gap: 2rem; }
+.gap-xl { gap: 3rem; }
+.gap-2xl { gap: 4rem; }
+
+/* Responsive gaps */
+.gap-responsive {
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+/* Padding utilities */
+.p-0 { padding: 0; }
+.p-1 { padding: 0.25rem; }
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 0.75rem; }
+.p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
+.p-8 { padding: 2rem; }
+.p-12 { padding: 3rem; }
+.p-16 { padding: 4rem; }
+.p-20 { padding: 5rem; }
+.p-24 { padding: 6rem; }
+
+/* Margin utilities */
+.m-0 { margin: 0; }
+.m-1 { margin: 0.25rem; }
+.m-2 { margin: 0.5rem; }
+.m-3 { margin: 0.75rem; }
+.m-4 { margin: 1rem; }
+.m-6 { margin: 1.5rem; }
+.m-8 { margin: 2rem; }
+.m-12 { margin: 3rem; }
+.m-16 { margin: 4rem; }
+.m-20 { margin: 5rem; }
+.m-24 { margin: 6rem; }
+.m-auto { margin: auto; }
+
+/* Width utilities */
+.w-full { width: 100%; }
+.w-auto { width: auto; }
+.w-fit { width: fit-content; }
+.w-max { width: max-content; }
+.w-min { width: min-content; }
+
+/* Height utilities */
+.h-full { height: 100%; }
+.h-auto { height: auto; }
+.h-fit { height: fit-content; }
+.h-max { height: max-content; }
+.h-min { height: min-content; }
+.h-screen { height: 100vh; }
+
+/* Container Queries */
+@container (min-width: 768px) {
+  .grid--responsive {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container (min-width: 1024px) {
+  .grid--responsive {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@container (min-width: 1280px) {
+  .grid--responsive {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Modern Responsive Design */
+@media screen and (max-width: 1200px) {
+  .container {
+    max-width: 1000px;
+  }
+  
+  .grid--cols-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid--cols-5,
+  .grid--cols-6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .container {
+    max-width: 768px;
+  }
+  
+  .grid--cols-3,
+  .grid--cols-4,
+  .grid--cols-5,
+  .grid--cols-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .flex--responsive {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    max-width: none;
+    padding: 0 1rem;
+  }
+  
+  .grid--cols-2,
+  .grid--cols-3,
+  .grid--cols-4,
+  .grid--cols-5,
+  .grid--cols-6 {
+    grid-template-columns: 1fr;
+  }
+  
+  .section {
+    padding: clamp(1.5rem, 4vw, 2.5rem) 0;
+  }
+  
+  .flex--mobile-column {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+  
+  .section {
+    padding: clamp(1rem, 3vw, 2rem) 0;
+  }
+}
+
+/* Print styles */
+@media print {
+  .container {
+    max-width: none;
+    padding: 0;
+  }
+  
+  .section {
+    padding: 1rem 0;
+    break-inside: avoid;
+  }
+  
+  .grid {
+    display: block;
+  }
+  
+  .flex {
+    display: block;
+  }
+}

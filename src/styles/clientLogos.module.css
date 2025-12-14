@@ -1,0 +1,126 @@
+/* Client Logos Styles */
+.clientLogosContainer {
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.logosWrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.logosTrack {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  animation: scroll 20s linear infinite;
+  width: fit-content;
+}
+
+.logoItem {
+  flex-shrink: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: all 0.3s ease;
+  filter: none;
+}
+
+.logoItem:hover {
+  transform: scale(1.05);
+  opacity: 1;
+  filter: none;
+}
+
+.coloredLogo {
+  filter: none;
+}
+
+.coloredLogo:hover {
+  filter: none;
+}
+
+.logoImage {
+  max-height: 100%;
+  max-width: 150px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logoLink:hover .logoImage {
+  transform: scale(1.05);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.clientsSection {
+  background: transparent;
+  padding: 60px 0;
+}
+
+.clientsTitle {
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--muted-foreground);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .logosTrack {
+    gap: 40px;
+    animation-duration: 15s;
+  }
+
+  .logoItem {
+    height: 40px;
+  }
+
+  .logoImage {
+    max-width: 100px;
+  }
+
+  .clientLogosContainer {
+    padding: 30px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .logosTrack {
+    gap: 30px;
+    animation-duration: 12s;
+  }
+
+  .logoItem {
+    height: 35px;
+  }
+
+  .logoImage {
+    max-width: 80px;
+  }
+}

@@ -1,0 +1,1535 @@
+/* Navigation Styles - Wipro-inspired Design */
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 0;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+  /* REMOVED: backdrop-filter can cause scrolling issues in Chrome */
+  /* backdrop-filter: blur(10px); */
+  /* Ensure navbar doesn't create stacking context that blocks scrolling */
+  will-change: auto;
+  /* CRITICAL: Don't use transform: translateZ(0) as it can cause scroll issues */
+  /* transform: translateZ(0); - REMOVED */
+  /* Ensure navbar doesn't interfere with scroll events */
+  pointer-events: auto;
+  /* Allow normal touch interactions on navbar while not blocking page scroll */
+  touch-action: manipulation;
+  /* Allow clicks/taps but prevent double-tap zoom */
+  color: var(--foreground);
+  font-family: 'Proxima Nova', 'ProximaNova', var(--font-body);
+}
+
+@media screen and (max-width: 1200px) {
+  .navbar {
+    display: none !important;
+  }
+}
+
+.navbar a,
+.navbar button {
+  color: var(--foreground);
+}
+
+.navbar a:hover,
+.navbar button:hover {
+  color: var(--blue-primary);
+}
+
+.navbar a:focus-visible,
+.navbar button:focus-visible {
+  outline: 2px solid rgba(17, 24, 39, 0.32);
+  outline-offset: 2px;
+}
+
+.navContainer {
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 24px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 110px;
+}
+
+.navBrand {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+
+.navMenu {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  margin: 0 auto;
+  /* flex: 1; Removed to fit content width */
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  position: relative;
+  /* Anchor for dropdown */
+  height: 100%;
+  /* Fill navbar height */
+}
+
+.navLink {
+  color: var(--foreground) !important;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  position: relative;
+  padding: 8px 0;
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  color: var(--blue-primary) !important;
+}
+
+.navActions {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  margin-left: auto;
+  flex-direction: row;
+  padding-right: 20px;
+}
+
+/* Dropdown Styles */
+.navDropdown {
+  position: static;
+  /* Allows dropdown to position relative to navMenu */
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 100%;
+}
+
+/* Bridge gap between trigger and menu */
+.navDropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  z-index: 10;
+}
+
+.navDropdownTrigger {
+  background: none;
+  border: none;
+  color: var(--foreground) !important;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0;
+  transition: color 0.2s ease;
+  position: relative;
+  outline: none;
+  height: 100%;
+}
+
+.navDropdownTrigger:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.navDropdownTrigger:focus-visible {
+  outline: 2px solid var(--blue-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.navDropdownTrigger:hover {
+  color: var(--blue-primary) !important;
+}
+
+/* Keep active/open dropdown trigger visible */
+.navDropdownTrigger[aria-expanded="true"] {
+  color: var(--blue-primary) !important;
+}
+
+.dropdownArrow {
+  transition: transform 0.2s ease;
+  color: inherit;
+}
+
+.dropdownArrow.open {
+  transform: rotate(180deg);
+}
+
+/* Full Width Mega Menu Container */
+.navDropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+  padding: 40px 0;
+  z-index: 1002;
+  transform-origin: top center;
+  animation: dropdownSlideFull 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 400px;
+  /* Ensure menu is scrollable if too tall */
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+}
+
+/* Header Container */
+.dropdownHeaderContainer {
+  max-width: 1400px;
+  margin: 0 auto 32px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+}
+
+.headerAccentBar {
+  width: 4px;
+  height: 32px;
+  background-color: #D4AF37;
+  margin-right: 16px;
+}
+
+.dropdownMainTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1;
+}
+
+/* Mega Menu Main Content Split */
+.dropdownMegaContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+/* Left Sidebar */
+.dropdownSidebar {
+  width: 320px;
+  flex-shrink: 0;
+  border-right: 1px solid #e5e7eb;
+  padding-right: 20px;
+}
+
+.sidebarHeader {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+  padding-left: 12px;
+}
+
+.sidebarList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebarItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 12px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  color: #4b5563;
+}
+
+.sidebarItem:hover,
+.sidebarItem.active {
+  background-color: #F3F4F6;
+  /* Gray-100 */
+  color: #4F46E5;
+  /* Indigo-600 to match Wipro/modern feel */
+  font-weight: 600;
+}
+
+.sidebarLabel {
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.sidebarArrow {
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.2s ease;
+  color: #4F46E5;
+}
+
+.sidebarItem:hover .sidebarArrow,
+.sidebarItem.active .sidebarArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Right Content Panel */
+.dropdownContentPanel {
+  flex: 1;
+  padding-top: 8px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.panelHeader {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.panelGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.panelCard {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.panelCard:hover {
+  background-color: #F9FAFB;
+}
+
+.panelCardTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.panelCardDesc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6b7280;
+}
+
+.dropdownSubheader {
+  grid-column: 1 / -1;
+  font-weight: 700;
+  font-size: 13px;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 8px;
+}
+
+/* Fallback Grid */
+.dropdownSimpleGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) translateX(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes dropdownSlideFull {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animated Menu Button */
+.menu {
+  --color: #374151;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  position: relative;
+  border: none;
+  background: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  display: none;
+}
+
+.menu svg {
+  width: 64px;
+  height: 48px;
+  top: -6px;
+  left: -14px;
+  stroke: var(--color);
+  stroke-width: 4px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  display: block;
+  position: absolute;
+}
+
+.menu svg path {
+  transition: stroke-dasharray var(--duration, .85s) var(--easing, ease) var(--delay, 0s), stroke-dashoffset var(--duration, .85s) var(--easing, ease) var(--delay, 0s);
+  stroke-dasharray: var(--array-1, 26px) var(--array-2, 100px);
+  stroke-dashoffset: var(--offset, 126px);
+  /* transform: translateZ(0); - Disabled for scroll performance */
+}
+
+.menu svg path:nth-child(2) {
+  --duration: .7s;
+  --easing: ease-in;
+  --offset: 100px;
+  --array-2: 74px;
+}
+
+.menu svg path:nth-child(3) {
+  --offset: 133px;
+  --array-2: 107px;
+}
+
+.menu.active svg path {
+  --offset: 57px;
+}
+
+.menu.active svg {
+  width: 80px;
+  height: 60px;
+  top: -12px;
+  left: -22px;
+}
+
+.menu.active svg path:nth-child(1),
+.menu.active svg path:nth-child(3) {
+  --delay: .15s;
+  --easing: cubic-bezier(.2, .4, .2, 1.1);
+}
+
+.menu.active svg path:nth-child(2) {
+  --duration: .4s;
+  --offset: 2px;
+  --array-1: 1px;
+}
+
+.menu.active svg path:nth-child(3) {
+  --offset: 58px;
+}
+
+
+
+.mobileMenu {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background-color: #1a1a1a;
+  /* Dark background like Virusha Tech */
+  padding: 0;
+  gap: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1003;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+  /* Allow scrolling in the entire menu */
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling on iOS */
+  visibility: hidden;
+  pointer-events: none;
+  /* Ensure mobile menu is scrollable and takes full height */
+  max-height: 100vh;
+  overscroll-behavior: contain;
+  /* Prevent scroll chaining to body */
+  /* Ensure content can scroll properly - but only when menu is visible */
+  min-height: auto;
+  /* Changed from 100vh to auto to prevent sticky effect */
+  /* Ensure menu doesn't affect page scrolling when hidden */
+  isolation: isolate;
+  /* Create new stacking context */
+}
+
+.mobileMenu.show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Purple Banner Styles - Virusha Tech Inspired */
+.mobileBanner {
+  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+  padding: 16px 20px;
+  border-radius: 0 0 12px 12px;
+  margin-bottom: 0;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.bannerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bannerText {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.bannerArrow {
+  color: white;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.bannerArrow:hover {
+  transform: translateX(2px);
+}
+
+
+
+/* Ensure proper scrolling behavior on mobile devices */
+@media screen and (max-width: 991px) {
+
+  /* Only prevent scrolling when mobile menu is actually open */
+  body:not(.mobile-menu-open) {
+    overflow: auto !important;
+    position: static !important;
+    height: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+}
+
+.mobileMenu.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Mobile menu backdrop */
+.mobileMenuBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 1002;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.mobileMenuBackdrop.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Animate menu items */
+.mobileMenu .navLink {
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: color 0.2s ease;
+  transition-delay: 0s;
+  margin-bottom: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.mobileMenu.show .navLink {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobileMenu.show .navLink:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.mobileMenu.show .navLink:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.mobileMenu.show .navLink:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.mobileMenu.show .navLink:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+.mobileMenu.show .navLink:nth-child(5) {
+  transition-delay: 0.5s;
+}
+
+.mobileMenu.show .navLink:nth-child(6) {
+  transition-delay: 0.6s;
+}
+
+/* Animate actions section */
+.mobileMenu>div {
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: color 0.2s ease;
+  transition-delay: 0.7s;
+}
+
+.mobileMenu.show>div {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Mobile Navigation Links - Virusha Tech Style */
+.mobileNavLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  /* White text for dark background */
+  background: none;
+  border: none;
+  border-bottom: 1px solid #333333;
+  /* Darker separator */
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.mobileNavLink:hover {
+  color: #60a5fa;
+  /* Light blue hover */
+  background-color: #2a2a2a;
+  /* Dark hover background */
+}
+
+.mobileNavLabel {
+  flex: 1;
+  text-align: left;
+}
+
+/* Mobile Dropdown Styles - Virusha Tech Style */
+.mobileDropdown {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.mobileDropdownTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  /* White text for dark background */
+  background: none;
+  border: none;
+  border-bottom: 1px solid #333333;
+  /* Darker separator */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.mobileDropdownTrigger:hover {
+  color: #60a5fa;
+  /* Light blue hover */
+  background-color: #2a2a2a;
+  /* Dark hover background */
+}
+
+.dropdownArrow {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.dropdownArrow.rotated {
+  transform: rotate(180deg);
+}
+
+.mobileDropdownContent {
+  padding: 0;
+  animation: slideDown 0.2s ease-out;
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--white);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+}
+
+.mobileDropdownSection {
+  margin-bottom: 8px;
+  width: 100%;
+  padding: 0;
+}
+
+.mobileDropdownSectionTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-600);
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mobileDropdownLink {
+  display: block;
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--text-dark);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.mobileSubDropdownContent {
+  padding: 8px 16px 0 16px;
+  animation: slideDown 0.2s ease-out;
+  display: block;
+  width: 100%;
+}
+
+
+/* Mobile Mega Menu Styles - Optimized for Mobile */
+.mobileMegaMenu {
+  padding: 0;
+  animation: slideDown 0.3s ease-out;
+  display: block;
+  width: 100%;
+  background-color: #000000;
+  margin-top: 0;
+  height: auto;
+  max-height: 70vh;
+  /* Increased height for better scrolling */
+  overflow-y: auto;
+  /* Allow vertical scrolling */
+  overflow-x: hidden;
+  /* Prevent horizontal scrolling */
+  position: relative;
+  -webkit-overflow-scrolling: touch !important;
+  /* Smooth scrolling on iOS */
+  overscroll-behavior: auto !important;
+  /* Allow normal scroll behavior */
+  /* Mobile-optimized touch handling */
+  touch-action: pan-y !important;
+  /* Better mobile performance */
+  will-change: scroll-position;
+  transform: translateZ(0);
+  /* Hardware acceleration */
+  /* Ensure scrolling works */
+  z-index: 1;
+}
+
+/* Services Header */
+.servicesHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background-color: #000000;
+  border-bottom: 1px solid #333333;
+}
+
+.servicesHeaderText {
+  color: #60a5fa;
+  /* Blue color */
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.servicesHeaderArrow {
+  color: #60a5fa;
+  transition: transform 0.2s ease;
+}
+
+/* Sub-section Header */
+.subsectionHeader {
+  padding: 12px 20px 8px 20px;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333333;
+}
+
+.subsectionHeaderText {
+  color: #9ca3af;
+  /* Gray color */
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Vertical list container for mobile mega menu */
+.mobileMegaMenuContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  background-color: #1a1a1a;
+  margin-bottom: 0;
+  /* Ensure container doesn't prevent scrolling */
+  overflow: visible;
+  height: auto;
+  min-height: 0;
+}
+
+/* Service item styles - Mobile Optimized */
+.megaMenuCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 14px 20px;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333333;
+  transition: background-color 0.2s ease;
+  min-height: 64px;
+  /* Better touch target */
+  width: 100%;
+  text-decoration: none;
+  /* Mobile-optimized touch handling */
+  touch-action: manipulation;
+  cursor: pointer;
+  /* Better mobile performance */
+  will-change: background-color;
+}
+
+.megaMenuCard:hover {
+  background-color: #2a2a2a;
+}
+
+.megaMenuCard:last-child {
+  border-bottom: none;
+  /* Remove bottom border from last item */
+}
+
+/* Ensure proper spacing between sections */
+.mobileMegaMenu>div:not(:last-child) .mobileMegaMenuContainer {
+  border-bottom: 2px solid #333333;
+}
+
+.megaMenuCardTitle {
+  font-weight: 500;
+  font-size: 15px;
+  color: #ffffff;
+  text-align: left;
+  line-height: 1.4;
+  flex: 1;
+  /* Better mobile readability */
+  letter-spacing: 0.01em;
+  /* Prevent text overflow */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.megaMenuCardLogo {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333333;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-right: 16px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  /* Mobile-optimized touch target */
+  min-width: 44px;
+  min-height: 44px;
+  /* Better mobile performance */
+  will-change: background-color, transform;
+}
+
+.megaMenuCard:hover .megaMenuCardLogo {
+  background-color: #60a5fa;
+  transform: scale(1.05);
+}
+
+.megaMenuCardItems {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.megaMenuCardItem {
+  display: block;
+  padding: 8px 12px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #495057;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.megaMenuCardItem:hover {
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+  color: #212529;
+}
+
+.mobileDropdownContent {
+  padding: 0;
+  animation: slideDown 0.2s ease-out;
+  display: block !important;
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--white);
+  box-shadow: none;
+  z-index: auto;
+  flex-direction: column;
+  overflow: visible;
+  margin-top: 8px;
+}
+
+.mobileSubDropdownContent {
+  padding: 8px 0;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 8px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.mobileDropdownLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--text-dark);
+  text-decoration: none;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  white-space: nowrap;
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+.mobileDropdownLink:last-child {
+  border-right: none;
+  margin-right: 0;
+}
+
+.mobileDropdownLink:hover {
+  color: var(--blue-primary);
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+}
+
+/* Mobile Sub-Dropdown Styles */
+.mobileSubDropdownTrigger {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-700);
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.mobileSubDropdownTrigger .dropdownArrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.mobileSubDropdownTrigger:hover {
+  background: #e9ecef;
+  border-color: #dee2e6;
+  color: var(--blue-primary);
+}
+
+.mobileSubDropdownTrigger:active {
+  background: #dee2e6;
+}
+
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile-specific menu styles */
+@media screen and (max-width: 991px) {
+  .mobileMenu {
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100vh;
+    max-height: 100vh;
+    -webkit-overflow-scrolling: touch;
+    touch-action: auto;
+    /* Ensure mobile menu doesn't interfere with mega menu scrolling */
+    position: relative;
+  }
+
+  /* Ensure mega menu is properly sized on mobile */
+  .mobileMegaMenu {
+    max-height: 70vh !important;
+    /* Increased height for better scrolling */
+    overflow-y: auto !important;
+    /* Allow vertical scrolling */
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
+    /* Allow vertical touch scrolling */
+    /* Ensure content is scrollable */
+    min-height: 0;
+    flex-shrink: 1;
+    /* Better mobile optimization */
+    position: relative;
+    z-index: 1;
+    /* Force scrolling to work on mobile */
+    height: auto !important;
+    max-height: 70vh !important;
+  }
+
+  /* Ensure proper spacing for mobile */
+  .mobileMegaMenuContainer {
+    padding-bottom: 20px;
+    /* Add bottom padding for better scrolling */
+    /* Ensure container doesn't interfere with scrolling */
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .mobileMenu .navLink {
+    font-size: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f3f4f6;
+    text-align: center;
+  }
+
+  .mobileMenu .navLink:last-child {
+    border-bottom: none;
+  }
+
+  /* Show menu button in mobile menu */
+  .mobileMenu .menu {
+    display: block !important;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    z-index: 1001;
+    outline: none !important;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateX(0);
+    overflow: visible;
+  }
+
+  /* Individual lines will handle the animation */
+
+  @keyframes flowToLeftAndReturn {
+    0% {
+      transform: translateX(0);
+    }
+
+    50% {
+      transform: translateX(calc(-100vw + 40px));
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes flowToLeftAndReturnToNavbar {
+    0% {
+      transform: translateX(0);
+    }
+
+    50% {
+      transform: translateX(calc(-100vw + 40px));
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+
+  .mobileMenu .menu:hover {
+    background: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .mobileMenu .menu:active,
+  .mobileMenu .menu:focus,
+  .mobileMenu .menu:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    background: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+  }
+
+  .mobileMenu .menu svg {
+    width: 64px;
+    height: 48px;
+    top: -6px;
+    left: -14px;
+    transition: opacity 0.2s ease;
+  }
+
+  .mobileMenu .menu.active svg {
+    width: 80px;
+    height: 60px;
+    top: -12px;
+    left: -22px;
+  }
+
+  /* Additional overrides for mobile menu button */
+  .mobileMenu .menu::-moz-focus-inner {
+    border: 0 !important;
+    padding: 0 !important;
+  }
+
+  .mobileMenu .menu::-webkit-focus-ring-color {
+    outline: none !important;
+  }
+
+  /* Show actions in mobile menu */
+  .mobileMenu .navActions {
+    display: flex;
+    gap: 16px;
+    margin-top: 20px;
+    padding: 20px;
+    border-top: 1px solid #333333;
+    flex-direction: row;
+    margin-left: 0;
+    justify-content: flex-end;
+    background-color: #1a1a1a;
+  }
+
+  .mobileMenu .navActions>*:not(.menu) {
+    display: block;
+  }
+
+  /* Target the div containing buttons in mobile menu */
+  .mobileMenu div {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+
+  /* Specific styling for mobile menu actions */
+  .mobileMenuActions {
+    display: flex !important;
+    gap: 16px !important;
+    justify-content: flex-end !important;
+    margin-top: 20px !important;
+  }
+
+  .mobileMenuActions .navPrimaryButton .navPrimaryText {
+    border-radius: 0 !important;
+    padding: 12px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    width: 80px !important;
+    height: 80px !important;
+    text-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1.2 !important;
+    min-width: 80px !important;
+    min-height: 80px !important;
+    max-width: 80px !important;
+    max-height: 80px !important;
+  }
+}
+
+/* Desktop Navigation - Ensure Horizontal Layout */
+@media screen and (min-width: 992px) {
+  .navMenu {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 40px;
+    align-items: center;
+    margin: 0 auto;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .navDropdown {
+    display: none !important;
+    /* Hide desktop dropdowns on mobile */
+  }
+
+  /* Ensure desktop dropdowns work on desktop */
+  @media screen and (min-width: 769px) {
+    .navDropdown {
+      display: inline-block !important;
+    }
+  }
+
+  .menu {
+    display: none !important;
+  }
+}
+
+/* Mobile and Tablet Navigation */
+@media screen and (max-width: 991px) {
+  .navMenu {
+    display: none !important;
+  }
+
+  .menu {
+    display: block !important;
+  }
+
+  .navContainer {
+    padding: 0 16px;
+    height: 64px;
+    justify-content: center;
+    position: relative;
+  }
+
+  .navBrand {
+    font-size: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Hide buttons on mobile, only show hamburger menu */
+  .navActions>*:not(.menu) {
+    display: none;
+  }
+
+  .navActions {
+    margin-left: 0;
+    gap: 0;
+    justify-content: flex-end;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    align-items: center;
+  }
+
+  .mobileMenu {
+    padding: 0;
+    transform: translateY(-100%);
+  }
+
+  .mobileMenu.show {
+    transform: translateY(0);
+  }
+
+  .mobileMenu.hidden {
+    transform: translateY(-100%);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navContainer {
+    padding: 0 12px;
+    height: 60px;
+    justify-content: center;
+    position: relative;
+  }
+
+  .navBrand {
+    font-size: 18px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .navActions {
+    right: 12px;
+  }
+
+  .mobileMenu {
+    padding: 0;
+    transform: translateY(-100%);
+  }
+
+  .mobileMenu.show {
+    transform: translateY(0);
+  }
+
+  .mobileMenu.hidden {
+    transform: translateY(-100%);
+  }
+}
+
+/* Mobile menu open state - DISABLED: This was causing sections to stick */
+/* Use JavaScript body lock instead if needed, but don't use position: fixed */
+body.mobile-menu-open {
+  overflow: hidden !important;
+  /* REMOVED: position: fixed - This was causing the sticky section issue! */
+  /* position: fixed !important; */
+  /* Use overflow: hidden only, no position manipulation */
+  position: relative !important;
+  /* Ensure position is relative, not fixed */
+  width: 100% !important;
+  height: auto !important;
+  /* Changed from 100% to auto to allow page scrolling */
+  top: auto !important;
+  /* Ensure no top offset */
+  bottom: auto !important;
+  touch-action: pan-y !important;
+  /* Allow vertical scrolling within menu */
+}
+
+html.mobile-menu-open {
+  overflow: hidden !important;
+  height: auto !important;
+  /* Changed from 100% to auto to allow page scrolling */
+  position: relative !important;
+  /* Ensure position is relative */
+  touch-action: pan-y !important;
+  /* Allow vertical scrolling within menu */
+}
+
+/* Ensure mobile menu can still be scrolled when body is locked */
+.mobileMenu.show {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: auto !important;
+  /* Allow touch scrolling on mobile menu */
+  /* Ensure mega menu can scroll independently */
+  position: relative !important;
+  z-index: 1003 !important;
+}
+
+/* Ensure mega menu scrolling works independently */
+.mobileMegaMenu {
+  /* Override any parent scrolling restrictions */
+  position: relative !important;
+  z-index: 1004 !important;
+  /* Force scrolling to work */
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+  /* Show scrollbar on mobile for better UX */
+  scrollbar-width: thin;
+  scrollbar-color: #666 #1a1a1a;
+  /* Additional mobile scrolling fixes */
+  overscroll-behavior: auto !important;
+  max-height: 70vh !important;
+}
+
+/* Custom scrollbar for webkit browsers */
+.mobileMegaMenu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mobileMegaMenu::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.mobileMegaMenu::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 3px;
+}
+
+.mobileMegaMenu::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+/* Responsive Mega Menu */
+@media screen and (max-width: 768px) {
+  .mobileMegaMenuContainer {
+    gap: 12px;
+    padding: 0 12px;
+  }
+
+  .megaMenuCard {
+    min-width: 260px;
+    width: 260px;
+    padding: 14px;
+  }
+
+  .megaMenuCardTitle {
+    font-size: 13px;
+  }
+
+  .megaMenuCardItem {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .mobileMegaMenu {
+    padding: 12px 0;
+    margin-top: 4px;
+    max-height: 65vh !important;
+    /* Increased height for vertical list */
+    overflow-y: auto !important;
+    /* Allow vertical scrolling */
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: auto !important;
+  }
+
+  /* Optimized list items for very small screens */
+  .megaMenuCard {
+    min-height: 56px;
+    padding: 12px 16px;
+    /* Better touch targets */
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .megaMenuCardTitle {
+    font-size: 14px;
+    line-height: 1.4;
+    /* Better readability */
+    font-weight: 500;
+  }
+
+  .megaMenuCardLogo {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    margin-right: 14px;
+    /* Better touch target */
+    min-width: 36px;
+    min-height: 36px;
+  }
+}
+
+/* Hide Navigation mobile menu on mobile devices - CardNav will be used instead */
+@media screen and (max-width: 768px) {
+
+  /* Hide the desktop nav to use CardNav on mobile */
+  .navbar {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .menu {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .mobileMenu,
+  .mobileMenuBackdrop {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+  }
+}

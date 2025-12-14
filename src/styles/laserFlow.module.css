@@ -1,0 +1,242 @@
+/* Laser Flow Animation Styles */
+.laserFlowContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #060010;
+  overflow: hidden;
+  border-radius: 12px;
+  min-height: 400px;
+}
+
+.laserCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.gridPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(139, 69, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 69, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+}
+
+.ambientGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(139, 69, 255, 0.05) 100%);
+  animation: ambientPulse 4s ease-in-out infinite;
+}
+
+.laserBeam {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.9) 5%,
+    rgba(139, 69, 255, 0.8) 15%,
+    rgba(255, 20, 147, 0.7) 30%,
+    rgba(139, 69, 255, 0.5) 50%,
+    rgba(255, 20, 147, 0.3) 70%,
+    rgba(139, 69, 255, 0.1) 85%,
+    transparent 100%
+  );
+  border-radius: 1px;
+  box-shadow: 
+    0 0 2px rgba(255, 255, 255, 0.8),
+    0 0 4px rgba(139, 69, 255, 0.6),
+    0 0 8px rgba(139, 69, 255, 0.4),
+    0 0 16px rgba(255, 20, 147, 0.3),
+    0 0 32px rgba(255, 20, 147, 0.2);
+  animation: laserFlow 3s ease-out forwards;
+  z-index: 2;
+}
+
+.laserBeam::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -2px;
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(139, 69, 255, 0.2) 30%,
+    rgba(255, 20, 147, 0.1) 70%,
+    transparent 100%
+  );
+  border-radius: 4px;
+  filter: blur(1px);
+}
+
+.laserBeam::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: -15px;
+  width: 30px;
+  height: 40px;
+  background: radial-gradient(ellipse, 
+    rgba(139, 69, 255, 0.4) 0%,
+    rgba(255, 20, 147, 0.2) 50%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  filter: blur(3px);
+}
+
+/* Intensity Variations */
+.intensity-low .laserBeam {
+  width: 2px;
+  box-shadow: 
+    0 0 5px rgba(139, 69, 255, 0.6),
+    0 0 10px rgba(139, 69, 255, 0.4);
+}
+
+.intensity-medium .laserBeam {
+  width: 4px;
+  box-shadow: 
+    0 0 10px rgba(139, 69, 255, 0.8),
+    0 0 20px rgba(139, 69, 255, 0.6),
+    0 0 30px rgba(139, 69, 255, 0.4);
+}
+
+.intensity-high .laserBeam {
+  width: 6px;
+  box-shadow: 
+    0 0 15px rgba(139, 69, 255, 1),
+    0 0 30px rgba(139, 69, 255, 0.8),
+    0 0 45px rgba(139, 69, 255, 0.6),
+    0 0 60px rgba(139, 69, 255, 0.4);
+}
+
+/* Color Variations */
+.color-purple .laserBeam {
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(139, 69, 255, 0.8) 20%,
+    rgba(255, 20, 147, 0.6) 60%,
+    rgba(139, 69, 255, 0.3) 80%,
+    transparent 100%
+  );
+  box-shadow: 
+    0 0 10px rgba(139, 69, 255, 0.8),
+    0 0 20px rgba(139, 69, 255, 0.6),
+    0 0 30px rgba(139, 69, 255, 0.4);
+}
+
+.color-blue .laserBeam {
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(59, 130, 246, 0.8) 20%,
+    rgba(147, 51, 234, 0.6) 60%,
+    rgba(59, 130, 246, 0.3) 80%,
+    transparent 100%
+  );
+  box-shadow: 
+    0 0 10px rgba(59, 130, 246, 0.8),
+    0 0 20px rgba(59, 130, 246, 0.6),
+    0 0 30px rgba(59, 130, 246, 0.4);
+}
+
+.color-pink .laserBeam {
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 20, 147, 0.8) 20%,
+    rgba(255, 105, 180, 0.6) 60%,
+    rgba(255, 20, 147, 0.3) 80%,
+    transparent 100%
+  );
+  box-shadow: 
+    0 0 10px rgba(255, 20, 147, 0.8),
+    0 0 20px rgba(255, 20, 147, 0.6),
+    0 0 30px rgba(255, 20, 147, 0.4);
+}
+
+.color-green .laserBeam {
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(34, 197, 94, 0.8) 20%,
+    rgba(16, 185, 129, 0.6) 60%,
+    rgba(34, 197, 94, 0.3) 80%,
+    transparent 100%
+  );
+  box-shadow: 
+    0 0 10px rgba(34, 197, 94, 0.8),
+    0 0 20px rgba(34, 197, 94, 0.6),
+    0 0 30px rgba(34, 197, 94, 0.4);
+}
+
+/* Animations */
+@keyframes laserFlow {
+  0% {
+    transform: translateX(-50%) scaleY(0.1) scaleX(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-50%) scaleY(0.8) scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) scaleY(1) scaleX(3);
+    opacity: 0.8;
+  }
+}
+
+@keyframes ambientPulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .laserFlowContainer {
+    min-height: 300px;
+  }
+  
+  .laserBeam {
+    width: 3px;
+  }
+  
+  .intensity-high .laserBeam {
+    width: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .laserFlowContainer {
+    min-height: 250px;
+  }
+  
+  .laserBeam {
+    width: 2px;
+  }
+  
+  .intensity-high .laserBeam {
+    width: 3px;
+  }
+}

@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 // use your own icon import if react-icons is not available
 import { GoArrowUpRight } from 'react-icons/go';
+import Button from './Button';
 import './CardNav.css';
 
 type CardNavLink = {
@@ -203,13 +204,7 @@ const CardNav: React.FC<CardNavProps> = ({
             <img src={logo} alt={logoAlt} className="logo" />
           </div>
 
-          <button
-            type="button"
-            className="card-nav-cta-button"
-            style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
-          >
-            Let's Talk
-          </button>
+          {/* Let's Talk button removed for mobile view as requested */}
         </div>
 
         <div className="card-nav-content" aria-hidden={!isExpanded}>

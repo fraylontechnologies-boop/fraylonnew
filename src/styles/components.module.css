@@ -634,8 +634,9 @@
   }
 
   .heroTitle {
-    font-size: clamp(2.5rem, 10vw, 3.5rem);
-    line-height: 1.2;
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    line-height: 1.1;
+    padding: 0 10px;
   }
 
   .heroSubtitle {
@@ -1864,7 +1865,7 @@
 
 /* Manual adjustment for Start Project button */
 .heroActionsContainer button:nth-child(2) {
-  margin-top: 10px;
+  margin-top: -2px;
   /* Adjust this value: positive moves down, negative moves up */
 }
 
@@ -1879,18 +1880,22 @@
 
 @media (max-width: 768px) {
   .heroActionsContainer {
-    flex-direction: column;
-    gap: 16px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
     width: 100%;
   }
 
   .heroActionsContainer>button {
-    width: 100%;
+    width: auto !important;
   }
 
   .heroBottomContainer {
-    gap: 24px;
+    gap: 15px;
     flex-direction: column;
+    margin-top: 20px;
   }
 
   .heroBottomContainer>p {
@@ -1909,6 +1914,19 @@
   align-items: center;
   gap: 0;
   position: relative;
+}
+
+@media (max-width: 768px) {
+  .splitCtaText {
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+  }
+
+  .splitCtaArrow {
+    width: 40px !important;
+    height: 40px !important;
+    background-size: 20px !important;
+  }
 }
 
 .splitCtaText {

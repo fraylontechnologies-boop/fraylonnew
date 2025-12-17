@@ -40,12 +40,14 @@ const OriginalHero: React.FC<OriginalHeroProps> = ({
           height: '100%',
           zIndex: 0,
           opacity: 1, // Full opacity for the video container
+          backgroundColor: '#000', // Fallback color while video loads
         }}>
           <video
             autoPlay
             loop
             muted
             playsInline
+            preload="auto"
             style={{
               width: '100%',
               height: '100%',

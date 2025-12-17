@@ -443,7 +443,7 @@
 
 /* Manual position adjustment for Start Project button (second button) */
 .heroHeading>*:last-child>*:nth-child(2) {
-  transform: translateY(-4px);
+  transform: translateY(2px);
   /* Change this value to adjust vertical position */
   /* Positive values move DOWN, negative values move UP */
   /* Examples: translateY(0px) = no offset, translateY(-10px) = 10px up, translateY(20px) = 20px down */

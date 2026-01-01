@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../styles/footer.module.css';
 import { ChevronDown } from 'lucide-react';
-import LiquidEther from './LiquidEther';
+
 
 const services = [
   { label: 'Web Development', href: '/services/web-development' },
@@ -83,33 +83,6 @@ const Footer: React.FC = () => {
 
   return (
     <footer className={styles.megaFooter} style={{ position: 'relative', overflow: 'hidden' }}>
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: 0,
-        pointerEvents: 'none'
-      }}>
-        <LiquidEther
-          colors={['#5227FF', '#FF9FFC', '#B19EEF']}
-          mouseForce={20}
-          cursorSize={100}
-          isViscous={false}
-          viscous={30}
-          iterationsViscous={12}
-          iterationsPoisson={12}
-          resolution={0.5}
-          isBounce={false}
-          autoDemo={true}
-          autoSpeed={0.5}
-          autoIntensity={2.2}
-          takeoverDuration={0.25}
-          autoResumeDelay={3000}
-          autoRampDuration={0.6}
-        />
-      </div>
       <div style={{ position: 'relative', zIndex: 1 }}>
         {/* Desktop View */}
         <div className={styles.desktopFooter}>

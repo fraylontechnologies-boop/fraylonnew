@@ -70,7 +70,14 @@ export const TypingBrand: React.FC<TypingBrandProps> = ({
         ...style
       }}
     >
-      {displayText || 'FraylonTechnologies'} {/* Fallback text */}
+      {/* Invisible placeholder to reserve full width */}
+      <span style={{ visibility: 'hidden', opacity: 0 }}>FraylonTechnologies</span>
+
+      {/* Animated text layer */}
+      <span style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', whiteSpace: 'nowrap' }}>
+        {displayText}
+      </span>
+
       <style>{`
         .typing-cursor {
           animation: blink 1s infinite;
